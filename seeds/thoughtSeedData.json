@@ -1,0 +1,32 @@
+[
+    {
+        "thoughtText": "I'm sleeping",
+        "username": "maggie",
+        "reactions": [
+            {
+                "reactionBody": "You sleep a lot!",
+                "username": "alice"
+            }
+        ]
+    }, 
+    {
+        "thoughtText": "I'm hungry",
+        "username": "nucita",
+        "reactions": [
+            {
+                "reactionBody": "You just ate",
+                "username": "maggie"
+            }
+        ]
+    },
+    {
+        "thoughtText": "I need to buy new clothes",
+        "username": "alice",
+        "reactions": [
+            {
+                "reactionBody": "You are not a human",
+                "username": "nucita"
+            }
+        ]
+    }
+]

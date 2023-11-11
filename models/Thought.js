@@ -18,6 +18,11 @@ const reactionSchema = new Schema(
                 return formattedDate;
             }
         }
+    },
+    {
+        toJSON: {
+            getters: true
+        },
     }
 );
 
@@ -47,7 +52,7 @@ const thoughtSchema = new Schema(
 
 // Create a virtual property `reactionCount` that gets the amount of reactions per thought
 thoughtSchema.virtual('reactionCount').get(function () {
-    return this.reaction.length;
+    return this.reactions.length;
 });
 
 // Initialize Thought model

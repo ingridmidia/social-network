@@ -32,4 +32,24 @@ postSchema.virtual('reactionCount').get(function () {
 // Initialize Thought model
 const Thought = model("thought", thoughtSchema);
 
+// Reaction schema used as the reaction field's subdocument schema in the Thought model.
+const reactionSchema = new Schema(
+    {
+        reactionId: {
+            type: Schema.Types.ObjectId,
+            default: () => new Types.ObjectId(),
+        },
+        reactionBody: { type: String, required: true, maxlength: 280 },
+        username: { type: String, required: true },
+        createdAt: {
+            type: Date, default: Date.now,
+            get: function (createdAtData) {
+                const customFormat = 'MMM D[th], YYYY [at] h:mm A';
+                const formattedDate = dayjs(createdAtData, { parseFormat: 'MMM Do, YYYY [at] h:mm a' }).format(customFormat);
+                return formattedDate;
+            }
+        }
+    }
+);
+
 module.exports = Thought;

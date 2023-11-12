@@ -24,7 +24,7 @@ router.get("/:userId", async (req, res) => {
     }
 });
 
-// Post a new user
+// Add a new user
 router.post("/", async (req, res) => {
     try {
         const user = await User.create(req.body);
@@ -58,6 +58,35 @@ router.delete("/:userId", async (req, res) => {
         }
         await Thought.deleteMany({ "username": user.username });
         res.status(200).json({ message: 'User and thoughts deleted' });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+// Add a new friend
+router.post("/:userId/friends/:friendId", async (req, res) => {
+    try {
+        const user = await User.findOneAndUpdate({ "_id": req.params.userId }, { $push: { friends: req.params.friendId } }, { new: true } );
+        if (!user) {
+            res.status(404).json({ message: 'Not found' });
+        }
+        res.status(200).json(user);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+// Delete a friend
+router.delete("/:userId/friends/:friendId", async (req, res) => {
+    try {
+        const user = await User.findOneAndUpdate({ "_id": req.params.userId }, { $pull: { friends: req.params.friendId } }, { new: true });
+
+        if (!user) {
+            return res.status(404).json({ message: 'Not found' });
+        }
+        res.status(200).json({ message: 'Friend deleted' });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);

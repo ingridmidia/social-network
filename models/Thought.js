@@ -14,7 +14,7 @@ const reactionSchema = new Schema(
             type: Date, default: Date.now,
             get: function (createdAtData) {
                 const customFormat = 'MMM D[th], YYYY [at] h:mm A';
-                const formattedDate = dayjs(createdAtData, { parseFormat: 'MMM Do, YYYY [at] h:mm a' }).format(customFormat);
+                const formattedDate = dayjs(createdAtData).format(customFormat);
                 return formattedDate;
             }
         }
@@ -23,6 +23,9 @@ const reactionSchema = new Schema(
         toJSON: {
             getters: true
         },
+    },
+    {
+        _id: false
     }
 );
 
@@ -34,7 +37,7 @@ const thoughtSchema = new Schema(
             type: Date, default: Date.now,
             get: function (createdAtData) {
                 const customFormat = 'MMM D[th], YYYY [at] h:mm A';
-                const formattedDate = dayjs(createdAtData, { parseFormat: 'MMM Do, YYYY [at] h:mm a' }).format(customFormat);
+                const formattedDate = dayjs(createdAtData).format(customFormat);
                 return formattedDate;
             }
         },
